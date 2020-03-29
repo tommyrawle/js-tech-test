@@ -5,12 +5,12 @@ import { getOutcomeDetails } from '../../redux/utils';
 import Price from '../Price/Price.jsx';
 
 const Outcome = ({ outcomeId, outcomes }) => {
+  const outcome = outcomes.find(outcome => outcome.outcomeId === outcomeId);
+
   useEffect(() => {
-    getOutcomeDetails(outcomeId);
+    if (!outcome) getOutcomeDetails(outcomeId);
   }, []);
 
-  const outcome = outcomes.find(outcome => outcome.outcomeId === outcomeId);
-  console.log(outcomeId);
   return (
     <div>
       {outcome && outcome.name}

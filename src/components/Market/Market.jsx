@@ -6,11 +6,12 @@ import { getMarketDetails } from '../../redux/utils';
 import Outcome from '../Outcome/Outcome.jsx';
 
 const Market = ({ marketId, markets }) => {
+  const market = markets.find(market => market.marketId === marketId);
+
   useEffect(() => {
-    getMarketDetails(marketId);
+    if (!market) getMarketDetails(marketId);
   }, []);
 
-  const market = markets.find(market => market.marketId === marketId);
   return (
     <div>
       {market && market.name}
