@@ -1,6 +1,6 @@
 import * as actionTypes from './types';
 
-export const initialiseApp = data => ({
+export const setData = data => ({
   type: actionTypes[data.type],
   payload: data.data
 });

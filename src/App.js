@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
+import Events from './components/Events/Events.jsx';
 import ws from './socket';
 
-const App = ({ initialiseApp }) => {
+const App = ({ setData }) => {
   const [isConnected, setConnectedState] = useState(false);
 
   useEffect(() => {
@@ -14,18 +15,22 @@ const App = ({ initialiseApp }) => {
 
     ws.onmessage = event => {
       const data = JSON.parse(event.data);
-      initialiseApp(data);
+      setData(data);
     };
   }, []);
-  return isConnected ? <div>Cheeeeese</div> : null;
+  return isConnected ? (
+    <div>
+      <Events />
+    </div>
+  ) : null;
 };
 
 const mapDispatchToProps = dispatch => ({
-  initialiseApp: data => dispatch(actions.initialiseApp(data))
+  setData: data => dispatch(actions.setData(data))
 });
 
 App.propTypes = {
-  initialiseApp: PropTypes.func
+  setData: PropTypes.func
 };
 
 export default connect(null, mapDispatchToProps)(App);
