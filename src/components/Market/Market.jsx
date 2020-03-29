@@ -3,18 +3,24 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { getMarketDetails } from '../../redux/utils';
+import Outcome from '../Outcome/Outcome.jsx';
 
-const Market = ({ id, markets }) => {
+const Market = ({ marketId, markets }) => {
   useEffect(() => {
-    getMarketDetails(id);
+    getMarketDetails(marketId);
   }, []);
 
-  const market = markets.find(market => market.marketId === id);
-  return <div>{market && market.name}</div>;
+  const market = markets.find(market => market.marketId === marketId);
+  return (
+    <div>
+      {market && market.name}
+      {market && market.outcomes.map((outcomeId, i) => <Outcome key={i} outcomeId={outcomeId} />)}
+    </div>
+  );
 };
 
 Market.propTypes = {
-  id: PropTypes.number,
+  marketId: PropTypes.number,
   markets: PropTypes.arrayOf(PropTypes.object)
 };
 const mapStateToProps = state => ({

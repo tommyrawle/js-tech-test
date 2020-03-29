@@ -17,7 +17,7 @@ const Event = ({ events }) => {
         return (
           <div key={i}>
             <p>{event.name}</p>
-            {event.markets && <Market id={event.markets[0]} />}
+            {event.markets && <Market marketId={event.markets[0]} />}
           </div>
         );
       })}

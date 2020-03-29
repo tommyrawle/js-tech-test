@@ -2,7 +2,9 @@ import * as actionTypes from './types';
 
 const initialState = {
   liveEvents: [],
-  marketDetails: []
+  marketDetails: [],
+  outcomeDetails: [],
+  priceFormat: 'dec'
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +19,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         marketDetails: [...state.marketDetails, action.payload]
+      };
+    }
+    case actionTypes.OUTCOME_DATA: {
+      return {
+        ...state,
+        outcomeDetails: [...state.outcomeDetails, action.payload]
       };
     }
 

@@ -7,3 +7,7 @@ export const getLiveEvents = showPrimaryMarkets => {
 export const getMarketDetails = id => {
   ws.send(JSON.stringify({ type: 'getMarket', id }));
 };
+
+export const getOutcomeDetails = id => {
+  ws.send(JSON.stringify({ type: 'getOutcome', id }));
+};
