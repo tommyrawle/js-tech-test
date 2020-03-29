@@ -1,7 +1,8 @@
 import * as actionTypes from './types';
 
 const initialState = {
-  liveEvents: []
+  liveEvents: [],
+  marketDetails: []
 };
 
 export default (state = initialState, action) => {
@@ -9,9 +10,16 @@ export default (state = initialState, action) => {
     case actionTypes.LIVE_EVENTS_DATA: {
       return {
         ...state,
-        liveEvents: action.payload
+        liveEvents: action.payload.sort((a, b) => a.displayOrder - b.displayOrder)
       };
     }
+    case actionTypes.MARKET_DATA: {
+      return {
+        ...state,
+        marketDetails: [...state.marketDetails, action.payload]
+      };
+    }
+
     default:
       return state;
   }

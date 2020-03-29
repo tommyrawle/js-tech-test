@@ -2,18 +2,22 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getLiveEvents } from '../../redux/utils';
+import Market from '../Market/Market.jsx';
 
 const Event = ({ events }) => {
   useEffect(() => {
-    getLiveEvents();
+    getLiveEvents(false);
   }, []);
 
   return (
     <div>
+      <label>Show primary market</label>
+      <input type="checkbox" onClick={e => getLiveEvents(e.target.checked)} />
       {events.map((event, i) => {
         return (
           <div key={i}>
             <p>{event.name}</p>
+            {event.markets && <Market id={event.markets[0]} />}
           </div>
         );
       })}
@@ -22,12 +26,10 @@ const Event = ({ events }) => {
 };
 
 const mapStateToProps = state => ({
-  loading: state.isLoading,
   events: state.liveEvents
 });
 
 Event.propTypes = {
-  loading: PropTypes.bool,
   events: PropTypes.arrayOf(PropTypes.object)
 };
 

@@ -1,5 +1,9 @@
 import ws from '../socket';
 
-export const getLiveEvents = () => {
-  ws.send(JSON.stringify({ type: 'getLiveEvents' }));
+export const getLiveEvents = showPrimaryMarkets => {
+  ws.send(JSON.stringify({ type: 'getLiveEvents', primaryMarkets: showPrimaryMarkets }));
+};
+
+export const getMarketDetails = id => {
+  ws.send(JSON.stringify({ type: 'getMarket', id }));
 };
