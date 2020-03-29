@@ -7,3 +7,4 @@ export const MARKET_STATUS = 'MARKET_STATUS';
 export const OUTCOME_STATUS = 'OUTCOME_STATUS';
 export const ERROR = 'ERROR';
 export const INIT = 'INIT';
+export const SET_ODDS_FORMAT = 'SET_ODDS_FORMAT';

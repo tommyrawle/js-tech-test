@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
-import Events from './components/Events/Events.jsx';
 import ws from './socket';
+import Events from './components/Events/Events.jsx';
+import Toggle from './components/Toggle/Toggle.jsx';
 
 const App = ({ setData }) => {
   const [isConnected, setConnectedState] = useState(false);
@@ -20,6 +21,7 @@ const App = ({ setData }) => {
   }, []);
   return isConnected ? (
     <div>
+      <Toggle />
       <Events />
     </div>
   ) : null;
