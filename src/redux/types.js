@@ -8,3 +8,4 @@ export const OUTCOME_STATUS = 'OUTCOME_STATUS';
 export const ERROR = 'ERROR';
 export const INIT = 'INIT';
 export const SET_ODDS_FORMAT = 'SET_ODDS_FORMAT';
+export const SET_LOADING_STATUS = 'SET_LOADING_STATUS';

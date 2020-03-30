@@ -18,6 +18,7 @@ const App = ({ setData }) => {
 
     ws.onmessage = event => {
       const data = JSON.parse(event.data);
+
       setData(data);
     };
   }, []);

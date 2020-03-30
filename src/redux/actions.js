@@ -9,3 +9,8 @@ export const setOddsFormat = value => ({
   type: actionTypes.SET_ODDS_FORMAT,
   payload: value
 });
+
+export const setLoadingStatus = bool => ({
+  type: actionTypes.SET_LOADING_STATUS,
+  payload: bool
+});

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getMarketDetails } from '../../redux/utils';
 import Outcome from '../Outcome/Outcome.jsx';
 
-const Market = ({ marketId, markets }) => {
+const Market = ({ marketId, markets, getOutcome }) => {
   const market = markets.find(market => market.marketId === marketId);
 
   useEffect(() => {
@@ -15,14 +15,15 @@ const Market = ({ marketId, markets }) => {
   return (
     <div>
       {market && market.name}
-      {market && market.outcomes.map((outcomeId, i) => <Outcome key={i} outcomeId={outcomeId} />)}
+      {getOutcome && market && market.outcomes.map((outcomeId, i) => <Outcome key={i} outcomeId={outcomeId} />)}
     </div>
   );
 };
 
 Market.propTypes = {
   marketId: PropTypes.number,
-  markets: PropTypes.arrayOf(PropTypes.object)
+  markets: PropTypes.arrayOf(PropTypes.object),
+  getOutcome: PropTypes.bool
 };
 const mapStateToProps = state => ({
   markets: state.marketDetails

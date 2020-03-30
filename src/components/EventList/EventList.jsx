@@ -18,7 +18,7 @@ const EventList = ({ events }) => {
         return (
           <div key={i}>
             <Link to={`/${event.eventId}`}>{event.name}</Link>
-            {event.markets && <Market marketId={event.markets[0]} />}
+            {event.markets && <Market marketId={event.markets[0]} getOutcome />}
           </div>
         );
       })}

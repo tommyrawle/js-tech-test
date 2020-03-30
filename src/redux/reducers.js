@@ -12,7 +12,16 @@ export default (state = initialState, action) => {
     case actionTypes.LIVE_EVENTS_DATA: {
       return {
         ...state,
-        liveEvents: action.payload.sort((a, b) => a.displayOrder - b.displayOrder)
+        liveEvents: action.payload
+      };
+    }
+    case actionTypes.EVENT_DATA: {
+      const updatedLiveEvents = [...state.liveEvents];
+      const index = updatedLiveEvents.findIndex(event => event.eventId === action.payload.eventId);
+      updatedLiveEvents.splice(index, 1, action.payload);
+      return {
+        ...state,
+        liveEvents: updatedLiveEvents
       };
     }
     case actionTypes.MARKET_DATA: {
@@ -31,6 +40,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         oddsFormat: action.payload
+      };
+    }
+    case actionTypes.SET_LOADING_STATUS: {
+      return {
+        ...state,
+        loading: action.payload
       };
     }
 
