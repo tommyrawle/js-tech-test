@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -12,10 +12,22 @@ const Market = ({ marketId, markets, getOutcome }) => {
     if (!market) getMarketDetails(marketId);
   }, []);
 
+  const [visibility, setVisibility] = useState(getOutcome);
+
+  const handleClick = () => {
+    setVisibility(!visibility);
+  };
+
   return (
     <div>
-      {market && market.name}
-      {getOutcome && market && market.outcomes.map((outcomeId, i) => <Outcome key={i} outcomeId={outcomeId} />)}
+      <button
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        {market && market.name}
+      </button>
+      {visibility && market && market.outcomes.map((outcomeId, i) => <Outcome key={i} outcomeId={outcomeId} />)}
     </div>
   );
 };
