@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getEventDetails, getMarketDetails } from '../../redux/utils';
+import { getDisplayableEvents, getDisplayableMarkets } from '../../redux/selectors';
 import Market from '../Market/Market.jsx';
 const Event = ({ events, markets }) => {
   const eventId = parseInt(useParams().eventId);
   const event = events.find(event => event.eventId === eventId);
   useEffect(() => {
-    if (!event) {
+    if (!event || (event && !event.markets)) {
       getEventDetails(eventId);
     } else {
       event.markets.forEach(market => getMarketDetails(market));
@@ -32,6 +33,7 @@ const Event = ({ events, markets }) => {
       <div>{JSON.stringify(event)}</div>
       <div>
         {event &&
+          event.markets &&
           sortedMarkets(event.markets).map((marketId, index) => (
             <Market key={index} getOutcome={index < 10} marketId={marketId} />
           ))}
@@ -46,11 +48,8 @@ Event.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  events: state.liveEvents,
-  markets: state.marketDetails
+  events: getDisplayableEvents(state),
+  markets: getDisplayableMarkets(state)
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   setLoadingStatus: bool => dispatch(setLoadingStatus(bool))
-// });
 export default connect(mapStateToProps)(Event);

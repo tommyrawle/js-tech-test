@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getLiveEvents } from '../../redux/utils';
 import Market from '../Market/Market.jsx';
 import { Link } from 'react-router-dom';
+import { getDisplayableEvents } from '../../redux/selectors';
 
 const EventList = ({ events }) => {
   useEffect(() => {
@@ -27,7 +28,7 @@ const EventList = ({ events }) => {
 };
 
 const mapStateToProps = state => ({
-  events: state.liveEvents
+  events: getDisplayableEvents(state)
 });
 
 EventList.propTypes = {

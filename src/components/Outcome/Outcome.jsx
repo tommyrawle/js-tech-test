@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getOutcomeDetails } from '../../redux/utils';
 import Price from '../Price/Price.jsx';
+import { getDisplayableOutcomes } from '../../redux/selectors';
 
 const Outcome = ({ outcomeId, outcomes }) => {
   const outcome = outcomes.find(outcome => outcome.outcomeId === outcomeId);
@@ -24,7 +25,7 @@ Outcome.propTypes = {
   outcomes: PropTypes.arrayOf(PropTypes.object)
 };
 const mapStateToProps = state => ({
-  outcomes: state.outcomeDetails
+  outcomes: getDisplayableOutcomes(state)
 });
 
 export default connect(mapStateToProps)(Outcome);

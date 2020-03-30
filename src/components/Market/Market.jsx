@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { getMarketDetails } from '../../redux/utils';
+import { getDisplayableMarkets } from '../../redux/selectors';
 import Outcome from '../Outcome/Outcome.jsx';
 
 const Market = ({ marketId, markets, getOutcome }) => {
@@ -38,7 +39,7 @@ Market.propTypes = {
   getOutcome: PropTypes.bool
 };
 const mapStateToProps = state => ({
-  markets: state.marketDetails
+  markets: getDisplayableMarkets(state)
 });
 
 export default connect(mapStateToProps)(Market);
