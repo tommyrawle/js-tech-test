@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import ws from './socket';
 import EventList from './components/EventList/EventList.jsx';
-import Toggle from './components/Toggle/Toggle.jsx';
 import Event from './components/Event/Event.jsx';
 import { Route } from 'react-router-dom';
+import './App.css';
+import Header from './components/Header/Header.jsx';
 
 const App = ({ setData }) => {
   const [isConnected, setConnectedState] = useState(false);
@@ -24,7 +25,7 @@ const App = ({ setData }) => {
   }, []);
   return isConnected ? (
     <div>
-      <Toggle />
+      <Header title="Live Events" />
       <Route exact path="/">
         <EventList />
       </Route>
