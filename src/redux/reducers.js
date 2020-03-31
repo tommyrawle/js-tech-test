@@ -4,7 +4,8 @@ const initialState = {
   liveEvents: [],
   marketDetails: [],
   outcomeDetails: [],
-  oddsFormat: 'fraction'
+  oddsFormat: 'fraction',
+  loading: true
 };
 
 export default (state = initialState, action) => {
@@ -27,7 +28,8 @@ export default (state = initialState, action) => {
     case actionTypes.MARKET_DATA: {
       return {
         ...state,
-        marketDetails: [...state.marketDetails, action.payload]
+        marketDetails: [...state.marketDetails, action.payload],
+        loading: false
       };
     }
     case actionTypes.OUTCOME_DATA: {

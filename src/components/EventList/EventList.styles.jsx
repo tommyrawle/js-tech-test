@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
 
+export const EventListTableContainer = styled.div`
+  margin: -4px 4rem;
+`;
+
 export const EventListTable = styled.table`
   margin: 0 auto;
   width: 100%;
@@ -18,7 +22,7 @@ export const EventListTableRow = styled.tr`
 `;
 
 export const EventListTableCell = styled.td`
-  padding: 10px 20px;
+  padding: ${({ eventCell }) => (eventCell ? '10px 20px' : '')};
   border-bottom: 1px solid #ececec;
 `;
 
@@ -28,4 +32,9 @@ export const EventLink = styled(Link)`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+export const EventImage = styled.img`
+  width: 100%;
+  height: auto;
 `;

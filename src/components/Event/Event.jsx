@@ -9,7 +9,7 @@ const Event = ({ events, markets }) => {
   const eventId = parseInt(useParams().eventId);
   const event = events.find(event => event.eventId === eventId);
   useEffect(() => {
-    if (!event || (event && !event.markets)) {
+    if (!event || (event && event.markets.length <= 1)) {
       getEventDetails(eventId);
     } else {
       event.markets.forEach(market => getMarketDetails(market));
