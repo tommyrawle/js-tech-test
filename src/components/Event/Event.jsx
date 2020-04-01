@@ -4,12 +4,14 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getEventDetails, getMarketDetails } from '../../redux/utils';
 import { getDisplayableEvents, getDisplayableMarkets } from '../../redux/selectors';
+import { EventMarkets } from './Event.styles.jsx';
 import Market from '../Market/Market.jsx';
+
 const Event = ({ events, markets }) => {
   const eventId = parseInt(useParams().eventId);
   const event = events.find(event => event.eventId === eventId);
   useEffect(() => {
-    if (!event || (event && event.markets.length <= 1)) {
+    if (!event || (event && !event.markets)) {
       getEventDetails(eventId);
     } else {
       event.markets.forEach(market => getMarketDetails(market));
@@ -28,18 +30,20 @@ const Event = ({ events, markets }) => {
     }, []);
   };
 
-  return (
-    <div>
-      <div>{JSON.stringify(event)}</div>
+  if (event) {
+    return (
       <div>
-        {event &&
-          event.markets &&
-          sortedMarkets(event.markets).map((marketId, index) => (
-            <Market key={index} getOutcome={index < 10} marketId={marketId} />
-          ))}
+        <div>{JSON.stringify(event)}</div>
+        <EventMarkets>
+          {event &&
+            event.markets &&
+            sortedMarkets(event.markets).map((marketId, index) => (
+              <Market key={index} getOutcome={index < 10} marketId={marketId} />
+            ))}
+        </EventMarkets>
       </div>
-    </div>
-  );
+    );
+  } else return <h2>...loading</h2>;
 };
 
 Event.propTypes = {

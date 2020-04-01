@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getOutcomeDetails } from '../../redux/utils';
 import Price from '../Price/Price.jsx';
 import { getDisplayableOutcomes } from '../../redux/selectors';
+import { OutcomeWrapper } from './Outcome.styles.jsx';
 
 const Outcome = ({ outcomeId, outcomes }) => {
   const outcome = outcomes.find(outcome => outcome.outcomeId === outcomeId);
@@ -12,12 +13,14 @@ const Outcome = ({ outcomeId, outcomes }) => {
     if (!outcome) getOutcomeDetails(outcomeId);
   }, []);
 
-  return (
-    <div>
-      {outcome && outcome.name}
-      {outcome && <Price price={outcome.price} />}
-    </div>
-  );
+  if (outcome) {
+    return (
+      <OutcomeWrapper>
+        {outcome.name}
+        {<Price price={outcome.price} />}
+      </OutcomeWrapper>
+    );
+  } else return null;
 };
 
 Outcome.propTypes = {

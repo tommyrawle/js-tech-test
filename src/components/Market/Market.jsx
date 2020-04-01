@@ -22,19 +22,21 @@ const Market = ({ marketId, markets, getOutcome }) => {
     setVisibility(!visibility);
   };
 
-  return (
-    <div>
-      <MarketButton
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        {market && market.name}
-        <ArrowIcon open={visibility} icon={faChevronDown} />
-      </MarketButton>
-      {visibility && market && market.outcomes.map((outcomeId, i) => <Outcome key={i} outcomeId={outcomeId} />)}
-    </div>
-  );
+  if (market) {
+    return (
+      <div>
+        <MarketButton
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {market.name}
+          <ArrowIcon open={visibility} icon={faChevronDown} />
+        </MarketButton>
+        {visibility && market.outcomes.map((outcomeId, i) => <Outcome key={i} outcomeId={outcomeId} />)}
+      </div>
+    );
+  } else return null;
 };
 
 Market.propTypes = {

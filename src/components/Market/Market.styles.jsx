@@ -9,6 +9,7 @@ export const MarketButton = styled.button`
   font-size: 1rem;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 export const ArrowIcon = styled(FontAwesomeIcon)`

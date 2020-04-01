@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const EventListTableContainer = styled.div`
-  margin: -4px 4rem;
+  margin: -4px 0;
 `;
 
 export const EventListTable = styled.table`
   margin: 0 auto;
-  width: 100%;
+  width: 60%;
+  @media (max-width: 676px) {
+    width: 100%;
+  }
 `;
 
 export const EventListTableRow = styled.tr`

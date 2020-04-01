@@ -13,7 +13,8 @@ export default (state = initialState, action) => {
     case actionTypes.LIVE_EVENTS_DATA: {
       return {
         ...state,
-        liveEvents: action.payload
+        liveEvents: action.payload,
+        loading: false
       };
     }
     case actionTypes.EVENT_DATA: {
