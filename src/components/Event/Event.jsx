@@ -2,9 +2,20 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getEventDetails, getMarketDetails } from '../../redux/utils';
+import { getEventDetails, getMarketDetails, formatDateOrTime } from '../../redux/utils';
 import { getDisplayableEvents, getDisplayableMarkets } from '../../redux/selectors';
-import { EventMarkets } from './Event.styles.jsx';
+import {
+  EventMarkets,
+  EventDetailsBlock,
+  EventDetailsTeam,
+  EventDetailsPosition,
+  EventDetailsTeamName,
+  EventDetailsScore,
+  SecondaryDetailsBlock,
+  DetailsEventType,
+  DetailsEventDate,
+  LiveIndicator
+} from './Event.styles.jsx';
 import Market from '../Market/Market.jsx';
 
 const Event = ({ events, markets }) => {
@@ -31,9 +42,36 @@ const Event = ({ events, markets }) => {
   };
 
   if (event) {
+    let teams = new Object();
+    event.competitors.forEach(team => {
+      teams[team.position] = team.name;
+    });
+
     return (
       <div>
-        <div>{JSON.stringify(event)}</div>
+        <EventDetailsBlock>
+          <EventDetailsTeam alignment={'right'}>
+            <EventDetailsPosition>Home</EventDetailsPosition>
+            <EventDetailsTeamName>{teams.home}</EventDetailsTeamName>
+            <EventDetailsScore>{event.scores.home}</EventDetailsScore>
+          </EventDetailsTeam>
+          <EventDetailsTeam alignment={'left'}>
+            <EventDetailsPosition>Away</EventDetailsPosition>
+            <EventDetailsTeamName>{teams.away}</EventDetailsTeamName>
+            <EventDetailsScore>{event.scores.away}</EventDetailsScore>
+          </EventDetailsTeam>
+        </EventDetailsBlock>
+
+        <SecondaryDetailsBlock>
+          <DetailsEventType>
+            {event.linkedEventTypeName ? `${event.linkedEventTypeName} / ${event.typeName}` : event.typeName}
+          </DetailsEventType>
+          <DetailsEventDate>
+            {formatDateOrTime(event.startTime, 'date')} | {formatDateOrTime(event.startTime, 'time')}
+            {event.status.live && <LiveIndicator />}
+          </DetailsEventDate>
+        </SecondaryDetailsBlock>
+
         <EventMarkets>
           {event &&
             event.markets &&

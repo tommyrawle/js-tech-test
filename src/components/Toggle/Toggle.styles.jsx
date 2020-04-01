@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ToggleWrapper = styled.div`
   color: #ffffff;
-  text-align: center;
+  text-align: right;
 `;
 
 export const ToggleButtonWrapper = styled.div`

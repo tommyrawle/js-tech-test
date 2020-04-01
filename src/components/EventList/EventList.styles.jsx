@@ -27,6 +27,7 @@ export const EventListTableRow = styled.tr`
 export const EventListTableCell = styled.td`
   padding: ${({ eventCell }) => (eventCell ? '10px 20px' : '')};
   border-bottom: 1px solid #ececec;
+  ${({ timeColumn }) => timeColumn && 'width: 100px; text-align: center'};
 `;
 
 export const EventLink = styled(Link)`

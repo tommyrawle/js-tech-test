@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getLiveEvents } from '../../redux/utils';
+import { getLiveEvents, formatDateOrTime } from '../../redux/utils';
 import Market from '../Market/Market.jsx';
 import { getDisplayableEvents } from '../../redux/selectors';
-import EventListImage from './eventList.jpg';
+import BGImage from '../../assets/bg.jpg';
 import {
   EventListTableContainer,
   EventListTable,
@@ -22,16 +22,16 @@ const EventList = ({ events, loading }) => {
   if (!loading) {
     return (
       <div>
-        <EventImage src={EventListImage} alt="live event" />
+        <EventImage src={BGImage} alt="live event" />
         <EventListTableContainer>
           <EventListTable>
             <tbody>
               {events.map((event, i) => {
                 return (
                   <EventListTableRow key={i}>
-                    <EventListTableCell>{i + 1}</EventListTableCell>
+                    <EventListTableCell timeColumn>{formatDateOrTime(event.startTime, 'time')}</EventListTableCell>
                     <EventListTableCell eventCell>
-                      <EventLink to={`/${event.eventId}`}>{event.name}</EventLink>
+                      <EventLink to={`/event/${event.eventId}`}>{event.name}</EventLink>
                     </EventListTableCell>
                     {event.markets && (
                       <EventListTableCell>

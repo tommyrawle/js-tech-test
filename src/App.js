@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
@@ -12,24 +12,24 @@ import Header from './components/Header/Header.jsx';
 const App = ({ setData }) => {
   const [isConnected, setConnectedState] = useState(false);
 
-  useEffect(() => {
-    ws.onopen = () => {
-      setConnectedState(true);
-    };
+  ws.onopen = () => {
+    setConnectedState(true);
+  };
+  ws.onerror = event => {
+    console.error('WebSocket error:', event);
+  };
+  ws.onmessage = event => {
+    const data = JSON.parse(event.data);
+    setData(data);
+  };
 
-    ws.onmessage = event => {
-      const data = JSON.parse(event.data);
-
-      setData(data);
-    };
-  }, []);
   return isConnected ? (
     <div>
       <Header title="Live Events" />
       <Route exact path="/">
         <EventList />
       </Route>
-      <Route path="/:eventId">
+      <Route path="/event/:eventId">
         <Event />
       </Route>
     </div>
