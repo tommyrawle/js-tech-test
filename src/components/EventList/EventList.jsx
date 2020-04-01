@@ -7,6 +7,7 @@ import { getDisplayableEvents } from '../../redux/selectors';
 import BGImage from '../../assets/bg.jpg';
 import {
   EventListTableContainer,
+  EventListHeader,
   EventListTable,
   EventListTableRow,
   EventListTableCell,
@@ -23,7 +24,15 @@ const EventList = ({ events, loading }) => {
     return (
       <div>
         <EventImage src={BGImage} alt="live event" />
+
         <EventListTableContainer>
+          <EventListHeader>
+            <h3>Live Events</h3>
+            <div>
+              <label>Show primary markets</label>
+              <input type="checkbox" onClick={e => getLiveEvents(e.target.checked)} />
+            </div>
+          </EventListHeader>
           <EventListTable>
             <tbody>
               {events.map((event, i) => {

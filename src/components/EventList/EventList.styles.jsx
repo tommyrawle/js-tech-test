@@ -3,15 +3,23 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const EventListTableContainer = styled.div`
-  margin: -4px 0;
-`;
-
-export const EventListTable = styled.table`
-  margin: 0 auto;
+  margin: 1rem auto;
   width: 60%;
   @media (max-width: 676px) {
     width: 100%;
   }
+`;
+
+export const EventListHeader = styled.th`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #002451;
+  color: #ffffff;
+  padding: 0 20px;
+`;
+export const EventListTable = styled.table`
+  width: 100%;
 `;
 
 export const EventListTableRow = styled.tr`
