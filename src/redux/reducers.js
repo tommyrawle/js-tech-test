@@ -1,42 +1,45 @@
 import * as actionTypes from './types';
 
 const initialState = {
-  liveEvents: [],
+  allEvents: [],
   marketDetails: [],
   outcomeDetails: [],
   oddsFormat: 'fraction',
-  loading: true
+  loading: true,
+  error: null
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.LIVE_EVENTS_DATA: {
+    case actionTypes.SET_ALL_LIVE_EVENTS: {
       return {
         ...state,
-        liveEvents: action.payload,
+        allEvents: action.payload.events,
+        loading: action.payload.loadingStatus
+      };
+    }
+    case actionTypes.SET_EVENT: {
+      const updatedEvents = [...state.allEvents];
+      const index = updatedEvents.findIndex(event => event.eventId === action.payload.eventId);
+      updatedEvents.splice(index, 1, action.payload);
+      return {
+        ...state,
+        allEvents: updatedEvents
+      };
+    }
+
+    case actionTypes.SET_MARKETS: {
+      console.log(action.payload);
+      return {
+        ...state,
+        marketDetails: action.payload,
         loading: false
       };
     }
-    case actionTypes.EVENT_DATA: {
-      const updatedLiveEvents = [...state.liveEvents];
-      const index = updatedLiveEvents.findIndex(event => event.eventId === action.payload.eventId);
-      updatedLiveEvents.splice(index, 1, action.payload);
+    case actionTypes.SET_OUTCOMES: {
       return {
         ...state,
-        liveEvents: updatedLiveEvents
-      };
-    }
-    case actionTypes.MARKET_DATA: {
-      return {
-        ...state,
-        marketDetails: [...state.marketDetails, action.payload],
-        loading: false
-      };
-    }
-    case actionTypes.OUTCOME_DATA: {
-      return {
-        ...state,
-        outcomeDetails: [...state.outcomeDetails, action.payload]
+        outcomeDetails: [...state.outcomeDetails, ...action.payload]
       };
     }
     case actionTypes.SET_ODDS_FORMAT: {
@@ -51,16 +54,13 @@ export default (state = initialState, action) => {
         loading: action.payload
       };
     }
-
+    case actionTypes.ERROR: {
+      return {
+        ...state,
+        error: action.payload
+      };
+    }
     default:
       return state;
   }
 };
-// 1: "LIVE_EVENTS_DATA"
-// 2: "EVENT_DATA"
-// 3: "MARKET_DATA"
-// 4: "OUTCOME_DATA"
-// 5: "PRICE_CHANGE"
-// 6: "MARKET_STATUS"
-// 7: "OUTCOME_STATUS"
-// 8: "ERROR

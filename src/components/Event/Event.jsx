@@ -2,8 +2,12 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getEventDetails, getMarketDetails, formatDateOrTime } from '../../redux/utils';
-import { getDisplayableEvents, getDisplayableMarkets } from '../../redux/selectors';
+import * as actions from '../../redux/actions';
+import { formatDateOrTime } from '../../redux/utils';
+import { getEventDetails, getMarketDetails } from '../../redux/getters';
+import { getDisplayableEvents, getSortedMarketIds } from '../../redux/selectors';
+import Spinner from '../Spinner/Spinner.jsx';
+
 import {
   EventMarkets,
   EventDetailsBlock,
@@ -18,30 +22,25 @@ import {
 } from './Event.styles.jsx';
 import Market from '../Market/Market.jsx';
 
-const Event = ({ events, markets }) => {
+const Event = ({ events, loading, setEvent, setMarkets, sortedMarketIds, setLoadingStatus }) => {
   const eventId = parseInt(useParams().eventId);
-  const event = events.find(event => event.eventId === eventId);
-  useEffect(() => {
-    if (!event || (event && !event.markets)) {
-      getEventDetails(eventId);
-    } else {
-      event.markets.forEach(market => getMarketDetails(market));
-    }
-  }, [events]);
 
-  const sortedMarkets = arrayOfMarketIds => {
-    const sortedMarkets = markets.sort((a, b) => {
-      return a.displayOrder - b.displayOrder || a.name > b.name ? 1 : -1;
+  const getEventPageData = async eventId => {
+    setLoadingStatus(true);
+    const event = await getEventDetails(eventId);
+    setEvent(event);
+    Promise.all(event.markets.map(async market => await getMarketDetails(market))).then(marketData => {
+      setMarkets(marketData);
     });
-    return sortedMarkets.reduce((sortedArrayOfIds, marketObject) => {
-      if (arrayOfMarketIds.includes(marketObject.marketId)) {
-        sortedArrayOfIds.push(marketObject.marketId);
-      }
-      return sortedArrayOfIds;
-    }, []);
   };
 
-  if (event) {
+  useEffect(() => {
+    getEventPageData(eventId);
+  }, []);
+
+  if (loading) return <Spinner />;
+  else {
+    const event = events.find(event => event.eventId === eventId);
     let teams = new Object();
     event.competitors.forEach(team => {
       teams[team.position] = team.name;
@@ -73,25 +72,31 @@ const Event = ({ events, markets }) => {
         </SecondaryDetailsBlock>
 
         <EventMarkets>
-          {event &&
-            event.markets &&
-            sortedMarkets(event.markets).map((marketId, index) => (
-              <Market key={index} getOutcome={index < 10} marketId={marketId} />
-            ))}
+          {sortedMarketIds.map((marketId, index) => {
+            return <Market key={index} marketId={marketId} outcomeOpen={index < 10} />;
+          })}
         </EventMarkets>
       </div>
     );
-  } else return <h2>...loading</h2>;
+  }
 };
 
 Event.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object),
-  markets: PropTypes.arrayOf(PropTypes.object)
+  markets: PropTypes.arrayOf(PropTypes.object),
+  loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   events: getDisplayableEvents(state),
-  markets: getDisplayableMarkets(state)
+  sortedMarketIds: getSortedMarketIds(state),
+  loading: state.loading
 });
 
-export default connect(mapStateToProps)(Event);
+const mapDispatchToProps = dispatch => ({
+  setEvent: eventObject => dispatch(actions.setEvent(eventObject)),
+  setMarkets: arrayOfMarkets => dispatch(actions.setMarkets(arrayOfMarkets)),
+  setLoadingStatus: bool => dispatch(actions.setLoadingStatus(bool))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Event);

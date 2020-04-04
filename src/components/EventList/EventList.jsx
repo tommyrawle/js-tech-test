@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getLiveEvents, formatDateOrTime } from '../../redux/utils';
+import { formatDateOrTime } from '../../redux/utils';
 import Market from '../Market/Market.jsx';
+import * as actions from '../../redux/actions';
 import { getDisplayableEvents } from '../../redux/selectors';
+import { getAllLiveEvents, getMarketDetails } from '../../redux/getters';
 import BGImage from '../../assets/bg.jpg';
+import Spinner from '../Spinner/Spinner.jsx';
 import {
   EventListTableContainer,
   EventListHeader,
@@ -12,25 +15,47 @@ import {
   EventListTableRow,
   EventListTableCell,
   EventLink,
-  EventImage
+  EventImage,
+  EventListInput
 } from './EventList.styles.jsx';
 
-const EventList = ({ events, loading }) => {
+const EventList = ({ events, loading, setMarkets, setAllLiveEvents, setLoadingStatus }) => {
+  const [primaryMarkets, setPrimaryMarketsOption] = useState(false);
+
+  const getEventListData = async primaryMarkets => {
+    setLoadingStatus(true);
+    const events = await getAllLiveEvents(primaryMarkets);
+    setAllLiveEvents(events, primaryMarkets);
+    const primaryMarketIds = events.reduce((arrayOfMarketIds, event) => {
+      if (event.markets) {
+        return [...arrayOfMarketIds, ...event.markets];
+      } else return arrayOfMarketIds;
+    }, []);
+    if (primaryMarketIds.length) {
+      Promise.all(primaryMarketIds.map(async market => await getMarketDetails(market))).then(marketData => {
+        setMarkets(marketData);
+      });
+    }
+  };
+
   useEffect(() => {
-    getLiveEvents(false);
-  }, []);
+    getEventListData(primaryMarkets);
+  }, [primaryMarkets]);
 
   if (!loading) {
     return (
       <div>
         <EventImage src={BGImage} alt="live event" />
-
         <EventListTableContainer>
           <EventListHeader>
             <h3>Live Events</h3>
             <div>
               <label>Show primary markets</label>
-              <input type="checkbox" onClick={e => getLiveEvents(e.target.checked)} />
+              <EventListInput
+                type="checkbox"
+                checked={primaryMarkets}
+                onChange={e => setPrimaryMarketsOption(e.target.checked)}
+              />
             </div>
           </EventListHeader>
           <EventListTable>
@@ -43,7 +68,7 @@ const EventList = ({ events, loading }) => {
                       <EventLink to={`/event/${event.eventId}`}>{event.name}</EventLink>
                     </EventListTableCell>
                     {event.markets && (
-                      <EventListTableCell>
+                      <EventListTableCell marketColumn>
                         <Market marketId={event.markets[0]} getOutcome />
                       </EventListTableCell>
                     )}
@@ -55,12 +80,17 @@ const EventList = ({ events, loading }) => {
         </EventListTableContainer>
       </div>
     );
-  } else return <h1>...loading</h1>;
+  } else return <Spinner />;
 };
 
 const mapStateToProps = state => ({
   events: getDisplayableEvents(state),
   loading: state.loading
+});
+const mapDispatchToProps = dispatch => ({
+  setAllLiveEvents: (arrayOfEvents, stillLoading) => dispatch(actions.setAllLiveEvents(arrayOfEvents, stillLoading)),
+  setMarkets: arrayOfMarkets => dispatch(actions.setMarkets(arrayOfMarkets)),
+  setLoadingStatus: bool => dispatch(actions.setLoadingStatus(bool))
 });
 
 EventList.propTypes = {
@@ -68,4 +98,4 @@ EventList.propTypes = {
   loading: PropTypes.bool
 };
 
-export default connect(mapStateToProps)(EventList);
+export default connect(mapStateToProps, mapDispatchToProps)(EventList);

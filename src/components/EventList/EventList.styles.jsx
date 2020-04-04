@@ -2,15 +2,18 @@ import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
 
+export const EventListInput = styled.input`
+  margin-left: 5px;
+`;
 export const EventListTableContainer = styled.div`
   margin: 1rem auto;
-  width: 60%;
+  width: 70%;
   @media (max-width: 676px) {
     width: 100%;
   }
 `;
 
-export const EventListHeader = styled.th`
+export const EventListHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,6 +39,8 @@ export const EventListTableCell = styled.td`
   padding: ${({ eventCell }) => (eventCell ? '10px 20px' : '')};
   border-bottom: 1px solid #ececec;
   ${({ timeColumn }) => timeColumn && 'width: 100px; text-align: center'};
+
+  ${({ marketColumn }) => marketColumn && 'width: 40%; vertical-align: top'};
 `;
 
 export const EventLink = styled(Link)`

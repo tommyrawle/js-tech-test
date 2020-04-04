@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  entry: `./src/index.js`,
+  entry: ['@babel/polyfill', './src/index.js'],
   mode: 'production',
   module: {
     rules: [
@@ -45,7 +45,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        extractComments: false,
+        extractComments: false
       })
     ]
   },

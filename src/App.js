@@ -9,18 +9,17 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header.jsx';
 
-const App = ({ setData }) => {
+const App = ({ setError }) => {
   const [isConnected, setConnectedState] = useState(false);
 
   ws.onopen = () => {
     setConnectedState(true);
   };
   ws.onerror = event => {
-    console.error('WebSocket error:', event);
+    setError(event);
   };
-  ws.onmessage = event => {
-    const data = JSON.parse(event.data);
-    setData(data);
+  ws.onclose = event => {
+    console.error('WebSocket now closed:', event);
   };
 
   return isConnected ? (
@@ -37,11 +36,11 @@ const App = ({ setData }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setData: data => dispatch(actions.setData(data))
+  setError: event => dispatch(actions.setError(event))
 });
 
 App.propTypes = {
-  setData: PropTypes.func
+  setError: PropTypes.func
 };
 
 export default connect(null, mapDispatchToProps)(App);
