@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`expect to render Price component 1`] = `ShallowWrapper {}`;
+exports[`expect to render Price component 1`] = `
+<styled.div>
+  undefined/undefined
+</styled.div>
+`;
 
-exports[`expect to render Price component 2`] = `ShallowWrapper {}`;
+exports[`expect to render Price component 2`] = `
+<styled.div>
+  NaN
+</styled.div>
+`;

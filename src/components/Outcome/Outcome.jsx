@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Price from '../Price/Price.container.jsx';
+import Price from '../Price/Price.jsx';
 import { getDisplayableOutcomes } from '../../redux/selectors';
 import { OutcomeWrapper } from './Outcome.styles.jsx';
 

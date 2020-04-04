@@ -29,7 +29,6 @@ export default (state = initialState, action) => {
     }
 
     case actionTypes.SET_MARKETS: {
-      console.log(action.payload);
       return {
         ...state,
         marketDetails: action.payload,

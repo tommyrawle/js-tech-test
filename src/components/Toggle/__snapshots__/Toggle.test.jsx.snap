@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toggle component should render Toggle component 1`] = `
+<styled.div>
+  Odds format
+  <styled.div>
+    <styled.button
+      id="fraction"
+      isActive={true}
+      left={true}
+      onClick={[Function]}
+      value="fraction"
+    >
+      Fraction
+    </styled.button>
+    <styled.button
+      id="decimal"
+      isActive={false}
+      onClick={[Function]}
+      right={true}
+      value="decimal"
+    >
+      Decimal
+    </styled.button>
+  </styled.div>
+</styled.div>
+`;

@@ -39,7 +39,7 @@ const Market = ({ marketId, markets, outcomeOpen, setOutcomes }) => {
       </div>
     );
   } else {
-    return null;
+    return <p>This event&apos;s primary market is not displayable</p>;
   }
 };
 

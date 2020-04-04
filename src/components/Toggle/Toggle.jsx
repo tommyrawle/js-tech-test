@@ -1,15 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions';
+import PropTypes from 'prop-types';
 import { ToggleWrapper, ToggleButtonWrapper, ToggleButton } from './Toggle.styles.jsx';
 
-const Toggle = ({ oddsFormat, setOddsFormat }) => {
+export const Toggle = ({ oddsFormat, setOddsFormat }) => {
   return (
     <ToggleWrapper>
       Odds format
       <ToggleButtonWrapper>
         <ToggleButton
+          id="fraction"
           left
           isActive={oddsFormat === 'fraction'}
           value="fraction"
@@ -18,6 +19,7 @@ const Toggle = ({ oddsFormat, setOddsFormat }) => {
           Fraction
         </ToggleButton>
         <ToggleButton
+          id="decimal"
           right
           isActive={oddsFormat === 'decimal'}
           value="decimal"
