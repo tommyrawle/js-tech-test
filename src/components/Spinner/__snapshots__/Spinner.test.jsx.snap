@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expect to render Spinner component 1`] = `
+<styled.div>
+  <styled.img
+    alt="loading indicator"
+    src={null}
+  />
+</styled.div>
+`;

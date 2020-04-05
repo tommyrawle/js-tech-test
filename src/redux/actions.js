@@ -25,6 +25,6 @@ export const setLoadingStatus = bool => ({
   payload: bool
 });
 export const setError = errorEvent => ({
-  type: actionTypes.ERROR,
+  type: actionTypes.SET_ERROR,
   payload: errorEvent
 });

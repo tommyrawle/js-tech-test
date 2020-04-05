@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
         loading: action.payload
       };
     }
-    case actionTypes.ERROR: {
+    case actionTypes.SET_ERROR: {
       return {
         ...state,
         error: action.payload
