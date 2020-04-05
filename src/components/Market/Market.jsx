@@ -8,7 +8,7 @@ import * as actions from '../../redux/actions';
 import Outcome from '../Outcome/Outcome.jsx';
 
 import { MarketButton, ArrowIcon } from './Market.styles.jsx';
-const Market = ({ marketId, markets, outcomeOpen, setOutcomes }) => {
+export const Market = ({ marketId, markets, outcomeOpen, setOutcomes }) => {
   const [visibility, setVisibility] = useState(outcomeOpen);
 
   useEffect(() => {

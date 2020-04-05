@@ -6,7 +6,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
-const Header = ({ title }) => {
+export const Header = ({ title }) => {
   let history = useHistory();
   const { pathname } = useLocation();
   return (

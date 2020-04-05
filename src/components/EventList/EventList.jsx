@@ -19,7 +19,7 @@ import {
   EventListInput
 } from './EventList.styles.jsx';
 
-const EventList = ({ events, loading, setMarkets, setAllLiveEvents, setLoadingStatus }) => {
+export const EventList = ({ events, loading, setMarkets, setAllLiveEvents, setLoadingStatus }) => {
   const [primaryMarkets, setPrimaryMarketsOption] = useState(false);
 
   const getEventListData = async primaryMarkets => {

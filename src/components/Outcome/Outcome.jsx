@@ -5,7 +5,7 @@ import Price from '../Price/Price.jsx';
 import { getDisplayableOutcomes } from '../../redux/selectors';
 import { OutcomeWrapper } from './Outcome.styles.jsx';
 
-const Outcome = ({ outcomeId, outcomes }) => {
+export const Outcome = ({ outcomeId, outcomes }) => {
   const outcome = outcomes.find(outcome => outcome.outcomeId === outcomeId);
 
   if (outcome) {

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Outcome component should render Outcome component 1`] = `
+<styled.div>
+  something or other
+  <Connect(Price)
+    price={
+      Object {
+        "decimal": 1.1428571428571428,
+        "den": 7,
+        "num": 1,
+      }
+    }
+  />
+</styled.div>
+`;
+
+exports[`Outcome component should render null if outcome does not exist 1`] = `""`;

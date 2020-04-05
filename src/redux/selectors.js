@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
 const getAllEvents = state => state.allEvents;
-const getAllMarkets = state => state.marketDetails;
-const getAllOutcomes = state => state.outcomeDetails;
+const getAllMarkets = state => state.markets;
+const getAllOutcomes = state => state.outcomes;
 
 export const getDisplayableEvents = createSelector([getAllEvents], events => {
   return events.filter(event => event.status.displayable);

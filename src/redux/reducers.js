@@ -1,9 +1,9 @@
 import * as actionTypes from './types';
 
-const initialState = {
+export const initialState = {
   allEvents: [],
-  marketDetails: [],
-  outcomeDetails: [],
+  markets: [],
+  outcomes: [],
   oddsFormat: 'fraction',
   loading: true,
   error: null
@@ -31,14 +31,14 @@ export default (state = initialState, action) => {
     case actionTypes.SET_MARKETS: {
       return {
         ...state,
-        marketDetails: action.payload,
+        markets: action.payload,
         loading: false
       };
     }
     case actionTypes.SET_OUTCOMES: {
       return {
         ...state,
-        outcomeDetails: [...state.outcomeDetails, ...action.payload]
+        outcomes: [...state.outcomes, ...action.payload]
       };
     }
     case actionTypes.SET_ODDS_FORMAT: {

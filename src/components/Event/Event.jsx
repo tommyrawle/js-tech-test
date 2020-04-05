@@ -22,7 +22,7 @@ import {
 } from './Event.styles.jsx';
 import Market from '../Market/Market.jsx';
 
-const Event = ({ events, loading, setEvent, setMarkets, sortedMarketIds, setLoadingStatus }) => {
+export const Event = ({ events, loading, setEvent, setMarkets, sortedMarketIds, setLoadingStatus }) => {
   const eventId = parseInt(useParams().eventId);
 
   const getEventPageData = async eventId => {

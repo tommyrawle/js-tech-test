@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventList component should render EventList component 1`] = `
+<div>
+  <styled.img
+    alt="live event"
+    src={null}
+  />
+  <styled.div>
+    <styled.div>
+      <h3>
+        Live Events
+      </h3>
+      <div>
+        <label>
+          Show primary markets
+        </label>
+        <styled.input
+          checked={false}
+          onChange={[Function]}
+          type="checkbox"
+        />
+      </div>
+    </styled.div>
+    <styled.table>
+      <tbody>
+        <styled.tr
+          key="0"
+        >
+          <styled.td
+            timeColumn={true}
+          >
+            12:35
+          </styled.td>
+          <styled.td
+            eventCell={true}
+          >
+            <Styled(Link)
+              to="/event/21249939"
+            >
+              Shanghai Shenhua 0 v 0 Shandong Luneng Taishan
+            </Styled(Link)>
+          </styled.td>
+        </styled.tr>
+      </tbody>
+    </styled.table>
+  </styled.div>
+</div>
+`;
