@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Market component should render Market component 1`] = `
+exports[`Market component render should render Market component 1`] = `
 <div>
   <styled.button
     onClick={[Function]}
@@ -30,7 +30,7 @@ exports[`Market component should render Market component 1`] = `
 </div>
 `;
 
-exports[`Market component should render market not displayable if market does not exist component 1`] = `
+exports[`Market component render should render market not displayable if market does not exist component 1`] = `
 <p>
   This event's primary market is not displayable
 </p>

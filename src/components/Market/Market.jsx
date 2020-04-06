@@ -10,18 +10,16 @@ import Outcome from '../Outcome/Outcome.jsx';
 import { MarketButton, ArrowIcon } from './Market.styles.jsx';
 export const Market = ({ marketId, markets, outcomeOpen, setOutcomes }) => {
   const [visibility, setVisibility] = useState(outcomeOpen);
-
+  const getOutcomeData = () => {
+    Promise.all(market.outcomes.map(async outcome => await getOutcomeDetails(outcome))).then(outcomeData => {
+      setOutcomes(outcomeData);
+    });
+  };
   useEffect(() => {
     if (visibility) {
-      Promise.all(market.outcomes.map(async outcome => await getOutcomeDetails(outcome))).then(outcomeData => {
-        setOutcomes(outcomeData);
-      });
+      getOutcomeData();
     }
   }, [visibility]);
-
-  const handleClick = () => {
-    setVisibility(!visibility);
-  };
 
   const market = markets.find(market => market.marketId === marketId);
   if (market) {
@@ -29,7 +27,7 @@ export const Market = ({ marketId, markets, outcomeOpen, setOutcomes }) => {
       <div>
         <MarketButton
           onClick={() => {
-            handleClick();
+            setVisibility(!visibility);
           }}
         >
           {market.name}

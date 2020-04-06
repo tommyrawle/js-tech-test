@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Market } from './Market.jsx';
 
-describe('Market component', () => {
+describe('Market component render', () => {
   it('should render Market component', () => {
     const mockProps = {
       marketId: 123,

@@ -12,7 +12,12 @@ export const getDisplayableMarkets = createSelector([getAllMarkets], markets => 
 });
 export const getSortedMarketIds = createSelector([getDisplayableMarkets], displayableMarkets => {
   return displayableMarkets
-    .sort((a, b) => (a.displayOrder - b.displayOrder || a.name > b.name ? 1 : -1))
+    .sort((a, b) => {
+      if (a.displayOrder > b.displayOrder) return 1;
+      if (a.displayOrder < b.displayOrder) return -1;
+      if (a.name > b.name) return 1;
+      if (a.name < b.name) return -1;
+    })
     .reduce((accumulatedIDs, market) => {
       return [...accumulatedIDs, market.marketId];
     }, []);

@@ -42,10 +42,10 @@ export const EventList = ({ events, loading, setMarkets, setAllLiveEvents, setLo
     getEventListData(primaryMarkets);
   }, [primaryMarkets]);
 
-  if (!loading) {
-    return (
-      <div>
-        <EventImage src={BGImage} alt="live event" />
+  return (
+    <div>
+      <EventImage src={BGImage} alt="live event" />
+      {!loading ? (
         <EventListTableContainer>
           <EventListHeader>
             <h3>Live Events</h3>
@@ -78,9 +78,11 @@ export const EventList = ({ events, loading, setMarkets, setAllLiveEvents, setLo
             </tbody>
           </EventListTable>
         </EventListTableContainer>
-      </div>
-    );
-  } else return <Spinner />;
+      ) : (
+        <Spinner />
+      )}
+    </div>
+  );
 };
 
 const mapStateToProps = state => ({
@@ -95,7 +97,10 @@ const mapDispatchToProps = dispatch => ({
 
 EventList.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object),
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  setAllLiveEvents: PropTypes.func,
+  setMarkets: PropTypes.func,
+  setLoadingStatus: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventList);

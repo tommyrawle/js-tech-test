@@ -29,11 +29,12 @@ export const getEventDetails = eventId => {
 // It returns all the market details so they can be accumulated and dispatched all together
 export const getMarketDetails = marketId => {
   ws.send(JSON.stringify({ type: 'getMarket', id: marketId }));
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     ws.addEventListener('message', function(event) {
       const data = JSON.parse(event.data);
       if (data.type === 'MARKET_DATA' && data.data.marketId === marketId) {
         resolve(data.data);
+        reject(console.error('market request rejected'));
       }
     });
   });
