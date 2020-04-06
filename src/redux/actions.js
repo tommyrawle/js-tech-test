@@ -1,8 +1,8 @@
 import * as actionTypes from './types';
 
-export const setAllLiveEvents = (arrayOfEvents, loadingStatus) => ({
+export const setAllLiveEvents = arrayOfEvents => ({
   type: actionTypes.SET_ALL_LIVE_EVENTS,
-  payload: { events: arrayOfEvents, loadingStatus }
+  payload: arrayOfEvents
 });
 export const setEvent = eventObject => ({
   type: actionTypes.SET_EVENT,

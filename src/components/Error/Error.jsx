@@ -8,23 +8,22 @@ import { ErrorContainer } from './Error.styles.jsx';
 const Error = ({ error, setError }) => {
   const { pathname } = useLocation();
   let history = useHistory();
-  console.log(error, '<pathname');
   return (
     <ErrorContainer>
-      <div className="error">
+      <div>
         {pathname === '/error' ? (
           <div>
             <h1>Oops!</h1>
             <h3>It seems something has gone wrong</h3>
-            <h1 className="code">{error.code}</h1>
-            <p className="message">{error.message}</p>
+            <h1>{error.code}</h1>
+            <p>{error.message}</p>
           </div>
         ) : (
           <div>
             <h1>Oops!</h1>
             <h3>It seems you took a wrong turn.</h3>
-            <h1 className="code">404</h1>
-            <p className="message">Page Not Found</p>
+            <h1>404</h1>
+            <p>Page Not Found</p>
           </div>
         )}
         <button
@@ -33,7 +32,7 @@ const Error = ({ error, setError }) => {
             history.push('/');
           }}
         >
-          <i className="fa fa-chevron-left" aria-hidden="true"></i>Head Back
+          Head Back
         </button>
       </div>
     </ErrorContainer>

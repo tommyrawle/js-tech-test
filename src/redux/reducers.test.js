@@ -15,12 +15,6 @@ describe('live events reducer', () => {
       loading: false
     });
   });
-  it('should handle setting all live events data and setting loading state to true', () => {
-    expect(reducer(initialState, actions.setAllLiveEvents(events, true))).toMatchObject({
-      allEvents: [{ eventId: 21249938 }],
-      loading: true
-    });
-  });
 });
 
 describe('single event reducer case', () => {

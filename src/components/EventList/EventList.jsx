@@ -20,13 +20,12 @@ import {
   EventListInput
 } from './EventList.styles.jsx';
 
-export const EventList = ({ events, loading, setMarkets, setAllLiveEvents, setLoadingStatus, setError }) => {
+export const EventList = ({ events, loading, setMarkets, setAllLiveEvents, setError }) => {
   const [primaryMarkets, setPrimaryMarketsOption] = useState(false);
 
   const getEventListData = async primaryMarkets => {
-    setLoadingStatus(true);
     const events = await getAllLiveEvents(primaryMarkets);
-    setAllLiveEvents(events, primaryMarkets);
+    setAllLiveEvents(events);
     const primaryMarketIds = events.reduce((arrayOfMarketIds, event) => {
       if (event.markets) {
         return [...arrayOfMarketIds, ...event.markets];
@@ -97,7 +96,6 @@ EventList.propTypes = {
   loading: PropTypes.bool,
   setAllLiveEvents: PropTypes.func,
   setMarkets: PropTypes.func,
-  setLoadingStatus: PropTypes.func,
   setError: PropTypes.func
 };
 const mapStateToProps = state => ({
@@ -107,7 +105,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setAllLiveEvents: (arrayOfEvents, stillLoading) => dispatch(actions.setAllLiveEvents(arrayOfEvents, stillLoading)),
   setMarkets: arrayOfMarkets => dispatch(actions.setMarkets(arrayOfMarkets)),
-  setLoadingStatus: bool => dispatch(actions.setLoadingStatus(bool)),
   setError: error => dispatch(actions.setError(error))
 });
 

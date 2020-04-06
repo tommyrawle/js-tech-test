@@ -4,12 +4,11 @@ import * as actionTypes from './types';
 describe('set all live events action', () => {
   it('should create an action to set all the live events', () => {
     const arrayOfEvents = [{ id: 123, name: 'Radiohead vs Placebo' }];
-    const loading = true;
     const expectedAction = {
       type: actionTypes.SET_ALL_LIVE_EVENTS,
-      payload: { events: arrayOfEvents, loadingStatus: loading }
+      payload: arrayOfEvents
     };
-    expect(actions.setAllLiveEvents(arrayOfEvents, loading)).toEqual(expectedAction);
+    expect(actions.setAllLiveEvents(arrayOfEvents)).toEqual(expectedAction);
   });
 });
 

@@ -14,8 +14,8 @@ export default (state = initialState, action) => {
     case actionTypes.SET_ALL_LIVE_EVENTS: {
       return {
         ...state,
-        allEvents: action.payload.events,
-        loading: action.payload.loadingStatus
+        allEvents: action.payload,
+        loading: false
       };
     }
     case actionTypes.SET_EVENT: {

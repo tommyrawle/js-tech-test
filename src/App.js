@@ -29,7 +29,7 @@ const App = ({ setError, error }) => {
   ws.onclose = event => {
     console.error('WebSocket now closed:', event);
   };
-  console.log(isConnected);
+
   return isConnected ? (
     <div>
       <Header title="Live Events" />
