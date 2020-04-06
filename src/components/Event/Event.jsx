@@ -22,16 +22,18 @@ import {
 } from './Event.styles.jsx';
 import Market from '../Market/Market.jsx';
 
-export const Event = ({ events, loading, setEvent, setMarkets, sortedMarketIds, setLoadingStatus }) => {
+export const Event = ({ events, loading, setEvent, setMarkets, sortedMarketIds, setLoadingStatus, setError }) => {
   const eventId = parseInt(useParams().eventId);
 
   const getEventPageData = async eventId => {
     setLoadingStatus(true);
     const event = await getEventDetails(eventId);
     setEvent(event);
-    Promise.all(event.markets.map(async market => await getMarketDetails(market))).then(marketData => {
-      setMarkets(marketData);
-    });
+    Promise.all(event.markets.map(async market => await getMarketDetails(market)))
+      .then(marketData => {
+        setMarkets(marketData);
+      })
+      .catch(error => setError(error));
   };
 
   useEffect(() => {
@@ -84,7 +86,11 @@ export const Event = ({ events, loading, setEvent, setMarkets, sortedMarketIds, 
 Event.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object),
   markets: PropTypes.arrayOf(PropTypes.object),
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  setEvent: PropTypes.func,
+  setMarkets: PropTypes.func,
+  setLoadingStatus: PropTypes.func,
+  setError: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -96,7 +102,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setEvent: eventObject => dispatch(actions.setEvent(eventObject)),
   setMarkets: arrayOfMarkets => dispatch(actions.setMarkets(arrayOfMarkets)),
-  setLoadingStatus: bool => dispatch(actions.setLoadingStatus(bool))
+  setLoadingStatus: bool => dispatch(actions.setLoadingStatus(bool)),
+  setError: error => dispatch(actions.setError(error))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);

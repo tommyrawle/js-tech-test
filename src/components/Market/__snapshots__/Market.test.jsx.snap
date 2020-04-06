@@ -2,11 +2,11 @@
 
 exports[`Market component render should render Market component 1`] = `
 <div>
-  <styled.button
+  <MarketButton
     onClick={[Function]}
   >
     test market
-    <Styled(FontAwesomeIcon)
+    <ArrowIcon
       icon={
         Object {
           "icon": Array [
@@ -22,7 +22,7 @@ exports[`Market component render should render Market component 1`] = `
       }
       open={true}
     />
-  </styled.button>
+  </MarketButton>
   <Connect(Outcome)
     key="0"
     outcomeId={789}
@@ -31,7 +31,9 @@ exports[`Market component render should render Market component 1`] = `
 `;
 
 exports[`Market component render should render market not displayable if market does not exist component 1`] = `
-<p>
+<p
+  id="marketDisabled"
+>
   This event's primary market is not displayable
 </p>
 `;

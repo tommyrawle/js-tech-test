@@ -11,7 +11,10 @@ export const MarketButton = styled.button`
   justify-content: space-between;
   cursor: pointer;
 `;
+MarketButton.displayName = 'MarketButton';
 
 export const ArrowIcon = styled(FontAwesomeIcon)`
   transform: ${({ open }) => (open ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
+
+ArrowIcon.displayName = 'ArrowIcon';

@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event component should render Event component 1`] = `
+<div>
+  <styled.div>
+    <styled.div
+      alignment="right"
+    >
+      <styled.div>
+        Home
+      </styled.div>
+      <styled.div>
+        Shanghai Shenhua
+      </styled.div>
+      <styled.div>
+        0
+      </styled.div>
+    </styled.div>
+    <styled.div
+      alignment="left"
+    >
+      <styled.div>
+        Away
+      </styled.div>
+      <styled.div>
+        Shandong Luneng Taishan
+      </styled.div>
+      <styled.div>
+        0
+      </styled.div>
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <styled.h2>
+      Chinese Super League / Football Live
+    </styled.h2>
+    <styled.div>
+      Tuesday 19 September 2017
+       | 
+      12:35
+      <styled.span />
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <Connect(Market)
+      key="0"
+      marketId={123}
+      outcomeOpen={true}
+    />
+  </styled.div>
+</div>
+`;
