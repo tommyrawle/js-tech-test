@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getDisplayableMarkets } from '../../redux/selectors';
 import { getOutcomeDetails } from '../../redux/getters';
 import * as actions from '../../redux/actions';
@@ -15,7 +16,11 @@ export const Market = ({ marketId, markets, outcomeOpen, setOutcomes, setError }
       .then(outcomeData => {
         setOutcomes(outcomeData);
       })
-      .catch(error => setError(error));
+      .catch(() => {
+        let history = useHistory();
+        setError({ code: 400, message: 'Could not process request' });
+        history.push('/error');
+      });
   };
   useEffect(() => {
     if (visibility) {

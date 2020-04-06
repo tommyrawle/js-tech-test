@@ -6,7 +6,7 @@ export const initialState = {
   outcomes: [],
   oddsFormat: 'fraction',
   loading: true,
-  error: null
+  error: {}
 };
 
 export default (state = initialState, action) => {

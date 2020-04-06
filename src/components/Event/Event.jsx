@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import * as actions from '../../redux/actions';
 import { formatDateOrTime } from '../../redux/utils';
 import { getEventDetails, getMarketDetails } from '../../redux/getters';
@@ -33,7 +34,11 @@ export const Event = ({ events, loading, setEvent, setMarkets, sortedMarketIds, 
       .then(marketData => {
         setMarkets(marketData);
       })
-      .catch(error => setError(error));
+      .catch(() => {
+        let history = useHistory();
+        setError({ code: 400, message: 'Could not process request' });
+        history.push('/error');
+      });
   };
 
   useEffect(() => {

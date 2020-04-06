@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { formatDateOrTime } from '../../redux/utils';
 import Market from '../Market/Market.jsx';
 import * as actions from '../../redux/actions';
@@ -36,7 +37,11 @@ export const EventList = ({ events, loading, setMarkets, setAllLiveEvents, setLo
         .then(marketData => {
           setMarkets(marketData);
         })
-        .catch(error => setError(error));
+        .catch(() => {
+          let history = useHistory();
+          setError({ code: 400, message: 'Could not process request' });
+          history.push('/error');
+        });
     }
   };
 
