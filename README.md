@@ -12,7 +12,6 @@ Similarly, choosing Redux for state management might be seen as overkill for suc
 
 The app has been tested using Jest and Enzyme as they work great together for testing React apps. I've put a lot of time into the testing however the tests are by no means extensive and in a real-world project I'd expect them to be much more detailed and robust.
 
-Thank you for taking the time to look through my submission!
 
 ## Getting Started
 
@@ -65,6 +64,7 @@ Although it's not likely you will need to run a production build, you may do so 
 $ npm build
 ```
 
-## Tasks completed
+## Final note
 
 I've completed tasks 1 & 2.
+Thank you for taking the time to look through my submission!
