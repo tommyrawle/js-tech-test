@@ -16,11 +16,10 @@ import { useHistory } from 'react-router-dom';
 export const App = ({ setError, error, initialiseApp, isAppInitialised }) => {
   let history = useHistory();
   ws.onopen = event => {
-    console.error('WebSocket now open:', event);
+    console.log('WebSocket now open:', event);
   };
   ws.onmessage = event => {
     if (JSON.parse(event.data).type === 'INIT') {
-      console.log('app initialised');
       initialiseApp(true);
     }
   };
@@ -30,7 +29,7 @@ export const App = ({ setError, error, initialiseApp, isAppInitialised }) => {
     history.push('/error');
   };
   ws.onclose = event => {
-    console.error('WebSocket now closed:', event);
+    console.log('WebSocket now closed:', event);
   };
 
   return isAppInitialised ? (
