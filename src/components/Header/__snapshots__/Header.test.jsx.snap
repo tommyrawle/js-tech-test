@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component should render Header component 1`] = `
+<styled.header>
+  <styled.h1
+    centered={false}
+  >
+    Live Events
+  </styled.h1>
+  <Connect(Toggle) />
+</styled.header>
+`;
+
+exports[`Header component should render Header component with back button if not on home page 1`] = `
+<styled.header>
+  <div>
+    <HeaderBackButton
+      onClick={[Function]}
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Object {
+            "icon": Array [
+              512,
+              512,
+              Array [],
+              "f359",
+              "M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z",
+            ],
+            "iconName": "arrow-alt-circle-left",
+            "prefix": "fas",
+          }
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+    </HeaderBackButton>
+  </div>
+  <styled.h1
+    centered={true}
+  >
+    Live Events
+  </styled.h1>
+  <Connect(Toggle) />
+</styled.header>
+`;

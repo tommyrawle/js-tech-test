@@ -91,6 +91,19 @@ describe('set loading status reducer case', () => {
   });
 });
 
+describe('set initialise app reducer case', () => {
+  const mockState = {
+    isAppInitialised: false
+  };
+  const mockPayload = true;
+  it('should handle initialising app', () => {
+    expect(reducer(mockState, actions.initialiseApp(mockPayload))).toEqual({
+      ...mockState,
+      isAppInitialised: mockPayload
+    });
+  });
+});
+
 describe('set error reducer case', () => {
   const mockState = {
     error: null

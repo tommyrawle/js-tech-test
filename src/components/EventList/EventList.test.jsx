@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { EventList } from './EventList.jsx';
 import '@babel/polyfill';
+
 describe('EventList component', () => {
   it('should render EventList component', () => {
     const mockProps = {
@@ -15,8 +16,7 @@ describe('EventList component', () => {
       ],
       loading: false,
       setMarkets: jest.fn(),
-      setAllLiveEvents: jest.fn(),
-      setLoadingStatus: jest.fn()
+      setAllLiveEvents: jest.fn()
     };
     expect(shallow(<EventList {...mockProps} />)).toMatchSnapshot();
   });

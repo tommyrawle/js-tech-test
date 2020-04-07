@@ -24,3 +24,4 @@ export const HeaderBackButton = styled.button`
   color: #ffffff;
   cursor: pointer;
 `;
+HeaderBackButton.displayName = 'HeaderBackButton';

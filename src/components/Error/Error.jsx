@@ -5,7 +5,7 @@ import * as actions from '../../redux/actions';
 import { useLocation, useHistory } from 'react-router-dom';
 import { ErrorContainer } from './Error.styles.jsx';
 
-const Error = ({ error, setError }) => {
+export const Error = ({ error, setError }) => {
   const { pathname } = useLocation();
   let history = useHistory();
   return (

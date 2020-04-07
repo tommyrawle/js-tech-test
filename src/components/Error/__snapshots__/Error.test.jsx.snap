@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error component 1st code block should render 1st block in Error component 1`] = `
+<styled.div>
+  <div>
+    <div>
+      <h1>
+        Oops!
+      </h1>
+      <h3>
+        It seems something has gone wrong
+      </h3>
+      <h1>
+        500
+      </h1>
+      <p>
+        something bad happened
+      </p>
+    </div>
+    <button
+      onClick={[Function]}
+    >
+      Head Back
+    </button>
+  </div>
+</styled.div>
+`;
+
+exports[`Error component 2nd code block should render 2nd block in Error component 1`] = `
+<styled.div>
+  <div>
+    <div>
+      <h1>
+        Oops!
+      </h1>
+      <h3>
+        It seems you took a wrong turn.
+      </h3>
+      <h1>
+        404
+      </h1>
+      <p>
+        Page Not Found
+      </p>
+    </div>
+    <button
+      onClick={[Function]}
+    >
+      Head Back
+    </button>
+  </div>
+</styled.div>
+`;

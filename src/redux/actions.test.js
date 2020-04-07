@@ -66,6 +66,16 @@ describe('set loading status action', () => {
     expect(actions.setLoadingStatus(isLoading)).toEqual(expectedAction);
   });
 });
+describe('set app initialisation action', () => {
+  it('should create an action to give the app an initialised state', () => {
+    const initialised = true;
+    const expectedAction = {
+      type: actionTypes.SET_INIT,
+      payload: initialised
+    };
+    expect(actions.initialiseApp(initialised)).toEqual(expectedAction);
+  });
+});
 describe('set error action', () => {
   it('should create an action to set the odds format', () => {
     const error = 'Error';

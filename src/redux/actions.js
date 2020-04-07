@@ -24,6 +24,10 @@ export const setLoadingStatus = bool => ({
   type: actionTypes.SET_LOADING_STATUS,
   payload: bool
 });
+export const initialiseApp = bool => ({
+  type: actionTypes.SET_INIT,
+  payload: bool
+});
 export const setError = errorEvent => ({
   type: actionTypes.SET_ERROR,
   payload: errorEvent

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component Error route should render Error route if pathname is /error 1`] = `
+<div>
+  <Header
+    title="Live Events"
+  />
+  <Route
+    path="/error"
+  >
+    <Connect(Error) />
+  </Route>
+</div>
+`;
+
+exports[`App component Happy route should render Spinner if app hasnt initialised yet 1`] = `<Spinner />`;
+
+exports[`App component Happy route should render main app once app has initialised 1`] = `
+<div>
+  <Header
+    title="Live Events"
+  />
+  <Switch>
+    <Route
+      exact={true}
+      path="/"
+    >
+      <Connect(EventList) />
+    </Route>
+    <Route
+      path="/event/:eventId"
+    >
+      <Connect(Event) />
+    </Route>
+    <Route
+      path="/error"
+    >
+      <Connect(Error) />
+    </Route>
+    <Route
+      path="*"
+    >
+      <Connect(Error) />
+    </Route>
+  </Switch>
+</div>
+`;

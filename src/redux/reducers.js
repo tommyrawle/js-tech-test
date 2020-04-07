@@ -6,6 +6,7 @@ export const initialState = {
   outcomes: [],
   oddsFormat: 'fraction',
   loading: true,
+  isAppInitialised: false,
   error: {}
 };
 
@@ -51,6 +52,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload
+      };
+    }
+    case actionTypes.SET_INIT: {
+      return {
+        ...state,
+        isAppInitialised: action.payload
       };
     }
     case actionTypes.SET_ERROR: {

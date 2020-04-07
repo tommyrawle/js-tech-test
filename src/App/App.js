@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from './redux/actions';
-import ws from './socket';
+import * as actions from '../redux/actions';
+import ws from '../socket';
 import './App.css';
-import EventList from './components/EventList/EventList.jsx';
-import Event from './components/Event/Event.jsx';
-import Header from './components/Header/Header.jsx';
-import Error from './components/Error/Error.jsx';
-import Spinner from './components/Spinner/Spinner.jsx';
+import EventList from '../components/EventList/EventList.jsx';
+import Event from '../components/Event/Event.jsx';
+import Header from '../components/Header/Header.jsx';
+import Error from '../components/Error/Error.jsx';
+import Spinner from '../components/Spinner/Spinner.jsx';
 
 import { useHistory } from 'react-router-dom';
 
-const App = ({ setError, error }) => {
-  const [isConnected, setConnectedState] = useState(false);
-
+export const App = ({ setError, error, initialiseApp, isAppInitialised }) => {
   let history = useHistory();
-
-  ws.onopen = () => {
-    setConnectedState(true);
+  ws.onopen = event => {
+    console.error('WebSocket now open:', event);
+  };
+  ws.onmessage = event => {
+    if (JSON.parse(event.data).type === 'INIT') {
+      console.log('app initialised');
+      initialiseApp(true);
+    }
   };
   ws.onerror = event => {
     console.error('WebSocket error:', event);
@@ -30,7 +33,7 @@ const App = ({ setError, error }) => {
     console.error('WebSocket now closed:', event);
   };
 
-  return isConnected ? (
+  return isAppInitialised ? (
     <div>
       <Header title="Live Events" />
       <Switch>
@@ -51,32 +54,31 @@ const App = ({ setError, error }) => {
   ) : error.code ? (
     <div>
       <Header title="Live Events" />
-      <Switch>
-        <Route path="/error">
-          <Error />
-        </Route>
-        <Route path="*">
-          <Error />
-        </Route>
-      </Switch>
+      <Route path="/error">
+        <Error />
+      </Route>
     </div>
   ) : (
     <Spinner />
   );
 };
 const mapStateToProps = state => ({
-  error: state.error
+  error: state.error,
+  isAppInitialised: state.isAppInitialised
 });
 const mapDispatchToProps = dispatch => ({
-  setError: event => dispatch(actions.setError(event))
+  setError: event => dispatch(actions.setError(event)),
+  initialiseApp: bool => dispatch(actions.initialiseApp(bool))
 });
 
 App.propTypes = {
   setError: PropTypes.func,
+  initialiseApp: PropTypes.func,
   error: PropTypes.shape({
     code: PropTypes.number,
     message: PropTypes.string
-  })
+  }),
+  isAppInitialised: PropTypes.bool
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
